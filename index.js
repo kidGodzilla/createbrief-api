@@ -63,7 +63,10 @@ app.post('/', function (req, res) {
 
 	request.post({url: url, form: data}, function (err, httpResponse, body) { 
 
-		if (err) console.log('Error:', err);
+		if (err) {
+			console.log('Error:', err);
+			res.status(500).send({error: err})
+		}
 
 		// if (body) console.log('Body:', body); // Uncomment for demonstration of response
 
