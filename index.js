@@ -2,8 +2,8 @@ const bodyParser = require('body-parser');
 const request = require('request');
 let app = require('express')();
 
+app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
-app.use(require('cors')()); // Rest of CORS
 
 app.use(function (req, res, next) { // Options middleware
     if (req.method === 'OPTIONS') {
@@ -20,11 +20,15 @@ app.use(function (req, res, next) { // Options middleware
     }
 });
 
+app.use(require('cors')()); // Rest of CORS
+
 const url = 'http://createbrief.com/processing/create-brief';
 
 app.post('/', function (req, res) {
   
 	let data = req.body;
+
+	console.log(data);
 
 	// let data = {
 	// 	title: 'Acme corp', // Required: Title text field
