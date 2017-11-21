@@ -28,7 +28,10 @@ app.post('/', function (req, res) {
   
 	let data = req.body;
 
-	console.log(data);
+	// console.log(data);
+
+	// Early return if something is missing
+	if (!data.title || !data.color || !data.audience || !data.values) return;
 
 	// let data = {
 	// 	title: 'Acme corp', // Required: Title text field
@@ -47,7 +50,11 @@ app.post('/', function (req, res) {
 	// 	values: 'Valurs', // Required: Values text field
 	// };
 
-	data.selectedSwatchIndex = data['additional_colors'].length;
+	if (data['additional_colors'] && data['additional_colors'].length)
+		data.selectedSwatchIndex = data['additional_colors'].length;
+	else
+		data.selectedSwatchIndex = 0;
+
 	data["ic-request"] = true;
 	data["ic-id"] = 1;
 	data["ic-target-id"] = 'overview-slide';
