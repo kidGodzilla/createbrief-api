@@ -77,7 +77,7 @@ app.post('/', function (req, res) {
 			res.send({brief: returnUrl});
 
 		}catch(e){
-			res.send('error');
+			res.status(500).send('Something broke!')
 		}
 
 	});
