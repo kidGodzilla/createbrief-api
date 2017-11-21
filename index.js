@@ -74,9 +74,11 @@ app.post('/', function (req, res) {
 			let returnUrl = body.split('window.location = \'')[1].split("'")[0];
 			console.log("Redirect URL is: ", returnUrl);
 
-			res.send(returnURL);
+			res.send({brief: returnUrl});
 
-		}catch(e){}
+		}catch(e){
+			res.send('error');
+		}
 
 	});
 });
