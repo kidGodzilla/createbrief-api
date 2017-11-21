@@ -24,6 +24,20 @@ app.use(require('cors')()); // Rest of CORS
 
 const url = 'http://createbrief.com/processing/create-brief';
 
+app.post('/getRedirect', function (req, res) {
+
+	let body = req.body;
+	if (!body.url) return;
+
+	// Req. body URL and get our 302 redirect URL
+
+	request.post({url: body.url}, function (err, httpResponse, body) { 
+		console.log(httpResponse.headers.location);
+		res.send({url: httpResponse.headers.location});
+	});
+
+});
+
 app.post('/', function (req, res) {
   
 	let data = req.body;
